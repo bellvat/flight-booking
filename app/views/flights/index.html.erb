@@ -1,0 +1,10 @@
+<h1> Pick your F(l)ights! </h1>
+
+<%= form_for @flight, url: flights_path, method: :get do |f| %>
+  <%= f.label "From" %>
+  <%= select_tag :to_airport_id, options_from_collection_for_select(Airport.all, :id, :code)  %>
+  <%= f.label "To" %>
+  <%= select_tag :to_airport_id, options_from_collection_for_select(Airport.all, :id, :code)  %>
+  <%= select_tag :flight_date, options_from_collection_for_select(Flight.all, :flight_date, :flight_date) %>
+  <%= f.submit "Search" %>
+<% end %>
