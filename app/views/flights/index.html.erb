@@ -2,11 +2,26 @@
 
 <%= form_for @flight, url: flights_path, method: :get do |f| %>
   <%= f.label "From" %>
-  <%= select_tag :to_airport_id, options_from_collection_for_select(Airport.all, :id, :code)  %>
+  <%= select_tag :from_airport_id, options_from_collection_for_select(Airport.all, :id, :code)  %>
   <%= f.label "To" %>
   <%= select_tag :to_airport_id, options_from_collection_for_select(Airport.all, :id, :code)  %>
   <%= select_tag :flight_date, options_from_collection_for_select(Flight.select('DISTINCT flight_date'), :flight_date, :flight_date) %>
   <%= f.label "Passenger" %>
   <%= select_tag :num_tickets, options_for_select([['1',1],['2',2],['3',3],['4',4]]) %>
   <%= f.submit "Search" %>
+<% end %>
+
+<% if !@search.nil? %>
+  <h3> You searched for: </h3>
+     <% from = Airport.find_by_id(params[:from_airport_id]) %>
+     <% to = Airport.find_by_id(params[:to_airport_id]) %>
+   <h4> <%= from.code %> to <%= to.code %></h4>
+  <h3> We found <%= @search.length %> flight(s): </h3>
+  <ul>
+    <% @search.each do |flight| %>
+    <!-- Is there a away to iterate through all attributes of the flight object?  -->
+    <!-- How to link to flight details? link_to path? -->
+      <li><%= flight.id %> <span><button> Pick me </button> </li>
+    <% end %>
+  </ul>
 <% end %>
