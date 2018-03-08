@@ -1,4 +1,4 @@
-<h1> Pick your F(l)ights! </h1>
+<h1> Pick your F(L)ights! </h1>
 
 <%= form_for @flight, url: flights_path, method: :get do |f| %>
   <%= f.label "From" %>
@@ -15,13 +15,16 @@
   <h3> You searched for: </h3>
      <% from = Airport.find_by_id(params[:from_airport_id]) %>
      <% to = Airport.find_by_id(params[:to_airport_id]) %>
-   <h4> <%= from.code %> to <%= to.code %></h4>
   <h3> We found <%= @search.length %> flight(s): </h3>
-  <ul>
+
+  <%= form_for @flight, url: new_flight_path do |n| %>
     <% @search.each do |flight| %>
     <!-- Is there a away to iterate through all attributes of the flight object?  -->
-    <!-- How to link to flight details? link_to path? -->
-      <li><%= flight.id %> <span><button> Pick me </button> </li>
+    <!-- How to link to flight details? link_to path with id? -->
+      <%= radio_button_tag(:flight, "Pick me") %>
+      <%= label_tag(:flight) %>
+
     <% end %>
-  </ul>
+    <%= n.submit "Submit" %>
+  <% end %>
 <% end %>

@@ -1,3 +1,0 @@
-class AirportArrival < ApplicationRecord
-
-end
