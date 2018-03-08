@@ -18,3 +18,6 @@ end
     Flight.create(to_airport_id: to, from_airport_id: from, flight_date: "2018-01-18",duration: 3)
   end
 end
+
+Passenger.create(name: "Monica", email: "me@gmail.com")
+
