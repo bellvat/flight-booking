@@ -9,7 +9,7 @@ class FlightsController < ApplicationController
     #select from where, to where and date
     #need to put it in where AND, in order to find the flight
     #@search = Flight.where('from_airport_id = ? and to_airport_id = ?', params[:from_airport_id], params[:to_airport_id])
-    @search = Flight.where('from_airport_id = ?', params[:from_airport_id])
+    @search = Flight.where('from_airport_id = ? and to_airport_id = ?', params[:from_airport_id], params[:to_airport_id])
 
   end
 end

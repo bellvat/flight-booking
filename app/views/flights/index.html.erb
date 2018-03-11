@@ -17,14 +17,21 @@
      <% to = Airport.find_by_id(params[:to_airport_id]) %>
   <h3> We found <%= @search.length %> flight(s): </h3>
 
-  <%= form_for @flight, url: new_flight_path do |n| %>
+  <%= form_for @flight, url: new_booking_path, method: :get do |n| %>
     <% @search.each do |flight| %>
     <!-- Is there a away to iterate through all attributes of the flight object?  -->
     <!-- How to link to flight details? link_to path with id? -->
-      <%= radio_button_tag(:flight, "Pick me") %>
-      <%= label_tag(:flight) %>
-
+      <li>
+      <%= flight.from_airport.code %>
+      <%= flight.to_airport.code %>
+      <%= flight.flight_date %>
+      <%= flight.duration %>
+      <%= params[:num_tickets] %>
+      <%= radio_button_tag(:flight, flight.id )%>
+      <%= label_tag(:flight,"Pick me") %>
+      </li>
     <% end %>
+    <%= hidden_field_tag(:num_tickets,"#{params[:num_tickets]}") %>
     <%= n.submit "Submit" %>
   <% end %>
 <% end %>
